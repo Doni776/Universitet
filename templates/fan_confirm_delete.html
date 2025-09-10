@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>"{{ fan.nom }}" fanini o‘chirishni xohlaysizmi?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Ha, o‘chir</button>
+  <a href="{% url 'fan_list' %}">Bekor qilish</a>
+</form>
+
+</body>
+</html>

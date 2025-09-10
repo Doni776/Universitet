@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ustozlar</title>
+</head>
+<body>
+<h1>Ustozlar</h1>
+
+<form method="get">
+  <input type="text" name="q" placeholder="Ism bo‘yicha qidirish" value="{{ request.GET.q }}">
+  <button type="submit">Qidirish</button>
+</form>
+
+<ul>
+  {% for u in ustozlar %}
+    <li>
+      {{ u.ism }} ({{ u.fan.nom }})
+      | <a href="{% url 'ustoz_delete' u.id %}">O‘chirish</a>
+    </li>
+  {% empty %}
+    <li>Ustoz topilmadi</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'home' %}">🏠 Bosh sahifa</a>
+
+</body>
+</html>

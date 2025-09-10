@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>"{{ yonalish.nom }}" yo‘nalishini o‘chirishni xohlaysizmi?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Ha, o‘chir</button>
+  <a href="{% url 'yonalish_list' %}">Bekor qilish</a>
+</form>
+
+</body>
+</html>

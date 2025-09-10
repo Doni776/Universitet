@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yo'nalishlar</title>
+</head>
+<body>
+<h1>Yo‘nalishlar</h1>
+<ul>
+  {% for y in yonalishlar %}
+    <li>
+      {{ y.nom }}
+      | <a href="{% url 'yonalish_delete' y.id %}">O‘chirish</a>
+    </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'home' %}">🏠 Bosh sahifa</a>
+
+</body>
+</html>

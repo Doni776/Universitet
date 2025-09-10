@@ -1,0 +1,6 @@
+<h2>"{{ ustoz.ism }}" ustozini o‘chirishni xohlaysizmi?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Ha, o‘chir</button>
+  <a href="{% url 'ustoz_list' %}">Bekor qilish</a>
+</form>
