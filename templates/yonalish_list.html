@@ -6,14 +6,32 @@
 </head>
 <body>
 <h1>Yo‘nalishlar</h1>
+
+
 <ul>
   {% for y in yonalishlar %}
     <li>
       {{ y.nom }}
       | <a href="{% url 'yonalish_delete' y.id %}">O‘chirish</a>
     </li>
+  {% empty %}
+    <li>Yo‘nalish topilmadi</li>
   {% endfor %}
 </ul>
+
+<hr>
+
+<h3>Yangi yo‘nalish qo‘shish</h3>
+<form method="post">
+  {% csrf_token %}
+  <label for="nom">Yo‘nalish nomi:</label>
+  <input id="nom" type="text" name="nom" required>
+  <br><br>
+
+  <button type="submit">➕ Qo‘shish</button>
+</form>
+
+<br>
 <a href="{% url 'home' %}">🏠 Bosh sahifa</a>
 
 </body>

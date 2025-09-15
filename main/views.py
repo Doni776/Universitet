@@ -19,22 +19,47 @@ def yonalish_delete(request, pk):
 
 
 def fan_list(request):
+    if request.method == "POST":
+        Fan.objects.create(
+            nom=request.POST.get("nom"),
+            yonalish_id=request.POST.get("yonalish_id")
+        )
+        return redirect("fan_list")
+
     q = request.GET.get("q")
     if q:
         fanlar = Fan.objects.filter(nom__icontains=q)
     else:
         fanlar = Fan.objects.all()
-    return render(request, "fan_list.html", {"fanlar": fanlar})
+
+    yonalishlar = Yonalish.objects.all()   # 🔑 qo‘shildi
+
+    return render(request, "fan_list.html", {
+        "fanlar": fanlar,
+        "yonalishlar": yonalishlar   # 🔑 context ga berildi
+    })
 
 
 def ustoz_list(request):
+    if request.method == "POST":
+        Ustoz.objects.create(
+            ism=request.POST.get("ism"),
+            fan_id=request.POST.get("fan_id")
+        )
+        return redirect("ustoz_list")
+
     q = request.GET.get("q")
     if q:
         ustozlar = Ustoz.objects.filter(ism__icontains=q)
     else:
         ustozlar = Ustoz.objects.all()
-    return render(request, "ustoz_list.html", {"ustozlar": ustozlar})
 
+    fanlar = Fan.objects.all()   # 🔑 qo‘shildi
+
+    return render(request, "ustoz_list.html", {
+        "ustozlar": ustozlar,
+        "fanlar": fanlar   # 🔑 context ga berildi
+    })
 
 def ustoz_delete(request, pk):
     ustoz = get_object_or_404(Ustoz, pk=pk)
@@ -45,6 +70,12 @@ def ustoz_delete(request, pk):
 
 
 def yonalish_list(request):
+    if request.method == "POST":
+        Yonalish.objects.create(
+            nom=request.POST.get("nom")
+        )
+        return redirect("yonalish_list")
+
     yonalishlar = Yonalish.objects.all()
     return render(request, "yonalish_list.html", {"yonalishlar": yonalishlar})
 

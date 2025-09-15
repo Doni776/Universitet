@@ -7,10 +7,12 @@
 <body>
 <h1>Fanlar</h1>
 
+
 <form method="get">
   <input type="text" name="q" placeholder="Fan nomi bo‘yicha qidirish" value="{{ request.GET.q }}">
   <button type="submit">Qidirish</button>
 </form>
+
 
 <ul>
   {% for f in fanlar %}
@@ -22,6 +24,29 @@
     <li>Fan topilmadi</li>
   {% endfor %}
 </ul>
+
+<hr>
+
+
+<h3>Yangi fan qo‘shish</h3>
+<form method="post">
+  {% csrf_token %}
+  <label for="nom">Fan nomi:</label>
+  <input id="nom" type="text" name="nom" required>
+  <br><br>
+
+  <label for="yonalish">Yo‘nalish:</label>
+  <select id="yonalish" name="yonalish" required>
+    {% for y in yonalishlar %}
+      <option value="{{ y.id }}">{{ y.nom }}</option>
+    {% endfor %}
+  </select>
+  <br><br>
+
+  <button type="submit">➕ Qo‘shish</button>
+</form>
+
+<br>
 <a href="{% url 'home' %}">🏠 Bosh sahifa</a>
 
 </body>
