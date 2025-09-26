@@ -31,6 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "unfold",
+    "unfold.contrib.filters",
+    "unfold.contrib.forms",
+    "unfold.contrib.inlines",
+    "unfold.contrib.import_export",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,3 +126,60 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+UNFOLD = {
+
+    "SITE_TITLE": "Universitet Admin",
+    "SITE_HEADER": "Universitet Boshqaruv Paneli",
+    "SITE_URL": "/",
+    "SITE_ICON": None,
+    "SITE_LOGO": None,
+    "SITE_SYMBOL": "🎓",
+
+
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": True,
+    "SHOW_LANGUAGES": False,
+    "COLLAPSIBLE_SIDEBAR": True,
+    "DARK_MODE": True,
+    "DARK_MODE_DEFAULT": False,
+
+
+    "MAIN_MENU": [
+        {
+            "app": "main",
+            "label": "Universitet",
+            "icon": "academic-cap",
+            "models": [
+                {"model": "Yonalish", "label": "Yo‘nalishlar", "icon": "collection"},
+                {"model": "Fan", "label": "Fanlar", "icon": "book-open"},
+                {"model": "Ustoz", "label": "Ustozlar", "icon": "user-group"},
+            ],
+        },
+        {
+            "app": "auth",
+            "label": "Foydalanuvchilar",
+            "icon": "users",
+            "models": [
+                {"model": "User", "label": "Adminlar"},
+                {"model": "Group", "label": "Guruhlar"},
+            ],
+        },
+    ],
+
+    "TOP_MENU": [
+        {"name": "Dashboard", "url": "/admin/", "icon": "home"},
+        {"name": "Saytga o‘tish", "url": "/", "icon": "globe-alt"},
+    ],
+
+
+    "FOOTER_BRAND": "Universitet IS",
+    "FOOTER_URL": "https://example.com",
+
+
+    "SHOW_APP_NAME": True,
+    "SHOW_MODEL_ICON": True,
+    "CUSTOM_CSS": None,
+    "CUSTOM_JS": None,
+}

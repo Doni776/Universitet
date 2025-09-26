@@ -1,25 +1,45 @@
 from django.contrib import admin
-from .models import Yonalish,Fan,Ustoz
-from django.contrib.auth.models import Group, User
+from unfold.admin import ModelAdmin, TabularInline
 
-class UstozAdmin(admin.ModelAdmin):
-    list_display = ("id", "ism", "yosh", "jins", "daraja", "fan")
-    search_fields = ("ism",)
+from .models import Yonalish, Fan, Ustoz
+from django.contrib.auth.models import Group,   User
 
-class YonalishAdmin(admin.ModelAdmin):
-    list_display = ("id", "nom", "aktiv")
+
+
+class FanInline(TabularInline):
+    model = Fan
+    extra = 1
+    fields = ("nom", "asosiy", "yonalish")
+
+
+
+class UstozInline(TabularInline):
+    model = Ustoz
+    extra = 1
+    fields = ("ism", "yosh", "jins", "daraja")
+
+
+@admin.register(Yonalish)
+class YonalishAdmin(ModelAdmin):
+    list_display = ("nom", "aktiv")
     list_filter = ("aktiv",)
     search_fields = ("nom",)
+    inlines = [FanInline]
 
-class FanAdmin(admin.ModelAdmin):
-    list_display = ("id", "nom", "asosiy", "yonalish")
+
+@admin.register(Fan)
+class FanAdmin(ModelAdmin):
+    list_display = ("nom", "asosiy", "yonalish")
     list_filter = ("asosiy", "yonalish")
     search_fields = ("nom",)
+    inlines = [UstozInline]
 
 
-admin.site.register(Yonalish,YonalishAdmin)
-admin.site.register(Fan,FanAdmin)
-admin.site.register(Ustoz,UstozAdmin)
+@admin.register(Ustoz)
+class UstozAdmin(ModelAdmin):
+    list_display = ("ism", "yosh", "jins", "daraja", "fan")
+    list_filter = ("jins", "daraja", "fan")
+    search_fields = ("ism",)
 
 admin.site.unregister(Group)
 admin.site.unregister(User)

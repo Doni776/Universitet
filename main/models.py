@@ -8,6 +8,10 @@ class Yonalish(models.Model):
         return self.nom
 
 
+    class Meta:
+        verbose_name = "Yonalish"
+        verbose_name_plural = "Yonalishlar"
+
 class Fan(models.Model):
     nom = models.CharField(max_length=200)
     asosiy = models.BooleanField(default=False)
@@ -16,6 +20,9 @@ class Fan(models.Model):
     def __str__(self):
         return self.nom
 
+    class Meta:
+        verbose_name = "Fan"
+        verbose_name_plural = "Fanlar"
 
 class Ustoz(models.Model):
     JINS_CHOICES = [
@@ -36,3 +43,6 @@ class Ustoz(models.Model):
     def __str__(self):
         return self.ism
 
+    class Meta:
+        verbose_name = "Ustoz"
+        verbose_name_plural = "Ustozlar"
